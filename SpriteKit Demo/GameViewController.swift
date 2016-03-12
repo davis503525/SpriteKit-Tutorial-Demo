@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    
+    var scene: GameScene?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +27,10 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            skView.contentMode = .Center
             
             skView.presentScene(scene)
+            self.scene = scene
         }
     }
 

@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
             skView.contentMode = .Center
             
             skView.presentScene(scene)
@@ -53,5 +53,13 @@ class GameViewController: UIViewController {
 
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    @IBAction func didPressLeftButton(sender: AnyObject) {
+        self.scene?.moveInDirection(.Left)
+    }
+    
+    @IBAction func didPressRightButton(sender: AnyObject) {
+        self.scene?.moveInDirection(.Right)
     }
 }

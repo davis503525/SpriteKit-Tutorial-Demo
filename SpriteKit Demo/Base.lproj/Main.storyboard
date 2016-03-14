@@ -34,6 +34,9 @@
                                         <real key="value" value="26.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didPressRightButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="CTC-Yg-2qs"/>
+                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynT-xS-OWN">
                                 <rect key="frame" x="20" y="529" width="51" height="51"/>
@@ -50,6 +53,9 @@
                                         <real key="value" value="26.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didPressLeftButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="5XU-cW-ozg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

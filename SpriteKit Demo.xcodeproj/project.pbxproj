@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		604E22701C96416000DED515 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 604E226E1C96416000DED515 /* Explosion.sks */; };
+		604E22711C96416000DED515 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 604E226F1C96416000DED515 /* spark.png */; };
 		60A948B61C93DF5C00AFB128 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A948B51C93DF5C00AFB128 /* AppDelegate.swift */; };
 		60A948B81C93DF5C00AFB128 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60A948B71C93DF5C00AFB128 /* GameScene.sks */; };
 		60A948BA1C93DF5C00AFB128 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A948B91C93DF5C00AFB128 /* GameScene.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		604E226E1C96416000DED515 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		604E226F1C96416000DED515 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		60A948B21C93DF5C00AFB128 /* SpriteKit Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SpriteKit Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A948B51C93DF5C00AFB128 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60A948B71C93DF5C00AFB128 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 			children = (
 				60A948B51C93DF5C00AFB128 /* AppDelegate.swift */,
 				60A948B71C93DF5C00AFB128 /* GameScene.sks */,
+				604E226E1C96416000DED515 /* Explosion.sks */,
+				604E226F1C96416000DED515 /* spark.png */,
 				60A948B91C93DF5C00AFB128 /* GameScene.swift */,
 				60A948BB1C93DF5C00AFB128 /* GameViewController.swift */,
 				60A948BD1C93DF5C00AFB128 /* Main.storyboard */,
@@ -129,7 +135,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A948B81C93DF5C00AFB128 /* GameScene.sks in Resources */,
+				604E22711C96416000DED515 /* spark.png in Resources */,
 				60A948C41C93DF5C00AFB128 /* LaunchScreen.storyboard in Resources */,
+				604E22701C96416000DED515 /* Explosion.sks in Resources */,
 				60A948C11C93DF5C00AFB128 /* Assets.xcassets in Resources */,
 				60A948BF1C93DF5C00AFB128 /* Main.storyboard in Resources */,
 			);
@@ -294,6 +302,7 @@
 				60A948CA1C93DF5C00AFB128 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

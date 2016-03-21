@@ -13,6 +13,90 @@ enum Direction {
     case Left, Right
 }
 
+class LaneState: GKState {
+    var playerNode: SKNode
+    
+    init(player: SKNode) {
+        self.playerNode = player
+    }
+}
+
+class LeftLane: LaneState {
+    override func isValidNextState(stateClass: AnyClass) -> Bool {
+        if stateClass == MiddleLane.self {
+            return true
+        }
+        
+        return false
+    }
+    
+    override func didEnterWithPreviousState(previousState: GKState?) {
+        let moveAction = SKAction.moveToX(90.0, duration: 0.3)
+        self.playerNode.constraints = []
+        self.playerNode.removeActionForKey("horizontalMovement")
+        
+        let completion = SKAction.runBlock { () -> Void in
+            let constraint = SKConstraint.positionX(SKRange(constantValue: 90.0))
+            self.playerNode.constraints = [constraint]
+        }
+        
+        let newAction = SKAction.sequence([moveAction, completion])
+        self.playerNode.runAction(newAction, withKey: "horizontalMovement")
+    }
+}
+
+class MiddleLane: LaneState {
+    override func isValidNextState(stateClass: AnyClass) -> Bool {
+        if stateClass == LeftLane.self || stateClass == RightLane.self {
+            return true
+        }
+        
+        return false
+    }
+    
+    override func didEnterWithPreviousState(previousState: GKState?) {
+        let moveAction = SKAction.moveToX(160.0, duration: 0.3)
+        self.playerNode.constraints = []
+        self.playerNode.removeActionForKey("horizontalMovement")
+        
+        let completion = SKAction.runBlock { () -> Void in
+            let constraint = SKConstraint.positionX(SKRange(constantValue: 160.0))
+            self.playerNode.constraints = [constraint]
+        }
+        
+        let newAction = SKAction.sequence([moveAction, completion])
+        self.playerNode.runAction(newAction, withKey: "horizontalMovement")
+    }
+}
+
+class RightLane: LaneState {
+    override func isValidNextState(stateClass: AnyClass) -> Bool {
+        if stateClass == MiddleLane.self {
+            return true
+        }
+        
+        return false
+    }
+    
+    override func didEnterWithPreviousState(previousState: GKState?) {
+        let moveAction = SKAction.moveToX(230.0, duration: 0.3)
+        self.playerNode.constraints = []
+        self.playerNode.removeActionForKey("horizontalMovement")
+        
+        let completion = SKAction.runBlock { () -> Void in
+            let constraint = SKConstraint.positionX(SKRange(constantValue: 230.0))
+            self.playerNode.constraints = [constraint]
+        }
+        
+        let newAction = SKAction.sequence([moveAction, completion])
+        self.playerNode.runAction(newAction, withKey: "horizontalMovement")
+    }
+}
+
+class LaneStateMachine: GKStateMachine {
+
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var playerNode: SKNode?
@@ -22,6 +106,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var spawnSideWall: NSTimer!
     var spawnObstacle: NSTimer!
+    
+    var acceptMoveControl = true
+    var stateMachine: GKStateMachine!
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -69,6 +156,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let xConstraint = SKConstraint.positionX(SKRange(constantValue: 160.0))
         
         camera.constraints = [playerLocationConstraint, xConstraint]
+        
+        self.stateMachine = GKStateMachine(states: [LeftLane(player: self.playerNode!), MiddleLane(player: self.playerNode!), RightLane(player: self.playerNode!)])
+        self.stateMachine.enterState(MiddleLane.self)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -92,22 +182,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func moveInDirection(direction: Direction) {
         guard let playerNode = self.playerNode else { return }
+        
         playerNode.constraints = []
         
-        var x = 0.0
+        if (direction == .Right && self.stateMachine.currentState is LeftLane) ||
+         (direction == .Left && self.stateMachine.currentState is RightLane) {
+            self.stateMachine.enterState(MiddleLane.self)
+        } else if self.stateMachine.currentState is MiddleLane {
+            switch direction {
+            case .Left:
+                self.stateMachine.enterState(LeftLane.self)
+            case .Right:
+                self.stateMachine.enterState(RightLane.self)
+            }
+        }
+        
+        /*var x = 0.0
         if playerNode.position.x == 160.0 {
             x = direction == .Left ? 90.0 : 230.0
         } else if playerNode.position.x == 230.0 && direction == .Left {
             x = 160.0
         } else if playerNode.position.x == 90.0 && direction == .Right {
             x = 160.0
+        } else {
+            x = Double(playerNode.position.x)
         }
         
         let moveAction = SKAction.moveToX(CGFloat(x), duration: 0.3)
         playerNode.runAction(moveAction) { () -> Void in
             let constraint = SKConstraint.positionX(SKRange(constantValue: CGFloat(x)))
             playerNode.constraints = [constraint]
-        }
+            self.acceptMoveControl = true
+        }*/
     }
     
     func spawnInSideWallSet() {

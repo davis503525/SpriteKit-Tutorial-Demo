@@ -279,7 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.position = self.playerNode!.position
             
             //self.camera?.position = explosion.position
-            self.camera?.constraints = []
+            self.camera?.constraints = [SKConstraint.positionX(SKRange(constantValue: 160.0))]
             self.camera?.runAction(SKAction.moveTo(explosion.position, duration: 0.3))
             
             self.spawnSideWall.invalidate()
